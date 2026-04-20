@@ -1,31 +1,31 @@
-/* RESET */
+
+/* =======================
+   RESET + BASE
+======================= */
 body {
   margin: 0;
   padding-top: 70px;
   font-family: Arial, sans-serif;
   scroll-behavior: smooth;
+  background: #fff;
 }
 
-/* NAVBAR */
+/* =======================
+   NAVBAR
+======================= */
 .navbar {
   position: fixed;
   top: 0;
-  left: 0;
   width: 100%;
   height: 70px;
-
   background: black;
-  z-index: 1000;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
-
   padding: 0 20px;
-  box-sizing: border-box;
+  z-index: 1000;
 }
 
-/* NAV */
 .nav-links {
   list-style: none;
   display: flex;
@@ -33,66 +33,93 @@ body {
   padding: 0;
 }
 
-.nav-links li {
-  position: relative;
-}
-
-/* RIGHT ICONS */
 .right-icons {
   display: flex;
   align-items: center;
 }
 
-/* ICONS */
 .dropdown-icon,
 .basket-icon {
   height: 40px;
   cursor: pointer;
 }
 
-/* HIDE CHECKBOX */
+/* =======================
+   DROPDOWN MENU
+======================= */
 #menu-toggle {
   display: none;
 }
 
-/* DROPDOWN */
+.dropdown {
+  position: relative;
+}
+
 .dropdown-menu {
   display: none;
   position: absolute;
-  top: 100%;
+  top: 60px;
   left: 0;
-
   background: black;
+  min-width: 160px;
   list-style: none;
   padding: 0;
   margin: 0;
-
-  min-width: 160px;
-}
-
-.dropdown-menu li {
-  padding: 10px;
 }
 
 .dropdown-menu a {
   color: white;
   text-decoration: none;
   display: block;
-  padding: 10px;
-  border-bottom: 2px solid transparent;
+  padding: 12px;
+  border-bottom: 1px solid #222;
 }
 
-/* SHOW DROPDOWN */
-#menu-toggle:checked + label + .dropdown-menu {
+/* show dropdown */
+#menu-toggle:checked ~ .dropdown-menu {
   display: block;
 }
 
-/* PAGES */
+/* =======================
+   ACTIVE NAV - HOME / ABOUT 
+======================= */
+
+html:has(#home:target) a[href="#home"] {
+  color: orange;
+  border-bottom: 2px solid orange;
+}
+
+html:has(#about:target) a[href="#about"] {
+  color: orange;
+  border-bottom: 2px solid orange;
+}
+
+/* =======================
+   ACTIVE NAV - MENU / BASKET
+======================= */
+
+body.menu-page a[href="menu.html"],
+body.menu-page .dropdown-menu a[href="menu.html"] {
+  color: orange;
+  border-bottom: 2px solid orange;
+}
+
+body.basket-page a[href="basket.html"],
+body.basket-page .dropdown-menu a[href="basket.html"] {
+  color: orange;
+  border-bottom: 2px solid orange;
+}
+
+/* =======================
+   HOME / ABOUT SECTIONS
+======================= */
+
 .page {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  scroll-margin-top: 80px;
 }
 
 /* HOME */
@@ -129,34 +156,81 @@ body {
   align-items: center;
 }
 
-.dropdown-menu a {
+/* =======================
+   CATEGORY GRID (MENU)
+======================= */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  padding: 20px;
+}
+
+.category-box {
+  background: black;
   color: white;
+  text-align: center;
+  padding: 40px 10px;
   text-decoration: none;
-  border-bottom: 2px solid transparent;
+  font-size: 1.2rem;
+  border-radius: 12px;
 }
 
-/* default reset (prevents “always active”) */
-.dropdown-menu a {
+/* =======================
+   MENU ITEMS
+======================= */
+
+.menu-items {
+  display: none;
+  padding: 20px;
+}
+
+.menu-items:target {
+  display: block;
+}
+
+/* hide grid when category open */
+html:has(.menu-items:target) .category-grid {
+  display: none;
+}
+
+/* FOOD CARD */
+.food-card {
+  background: #f5f5f5;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+}
+
+.food-card h3 {
+  margin: 0 0 5px 0;
+}
+
+.food-card p {
+  margin: 0 0 10px 0;
+  color: #444;
+}
+
+/* ADD BUTTON */
+.food-card button {
+  background: black;
   color: white;
-  border-bottom: 2px solid transparent;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-/* HOME active when hash is #home */
-html:has(#home:target) .dropdown-menu a[href="#home"] {
-  color: orange;
-  border-bottom: 2px solid orange;
+.food-card button:hover {
+  background: #333;
 }
 
-/* ABOUT active when hash is #about */
-html:has(#about:target) .dropdown-menu a[href="#about"] {
-  color: orange;
-  border-bottom: 2px solid orange;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.page {
-  scroll-margin-top: 80px;
+/* BACK BUTTON */
+.back-btn {
+  display: inline-block;
+  margin-bottom: 15px;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
 }
