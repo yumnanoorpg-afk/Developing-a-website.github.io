@@ -8,55 +8,124 @@
 
 <body class="menu-page">
 
-<!-- SEARCH -->
-<section class="search-section">
-  <input type="text" placeholder="Search food..." class="search-bar">
-</section>
-
-<!-- CATEGORIES -->
+<!-- CATEGORY GRID -->
 <section class="category-grid">
-  <div class="category">Burgers</div>
-  <div class="category">Pizza</div>
-  <div class="category">Pasta</div>
-  <div class="category">Drinks</div>
-  <div class="category">Desserts</div>
-  <div class="category">Sides</div>
-</section>
 
-<!-- FOOD GRID -->
-<section class="food-grid">
+  <a href="#favs" class="category-box">All Time Favourites</a>
+  <a href="#veg" class="category-box">Vegetarian Options</a>
+  <a href="#sides" class="category-box">Sides</a>
+  <a href="#drinks" class="category-box">Drinks</a>
+  <a href="#all" class="category-box">View All</a>
+
+</section>
+<!-- ALL ITEMS -->
+<section id="all" class="menu-items">
+  <a href="menu.html" class="back-btn">← Back</a>
+  <h2>All Items</h2>
 
   <div class="food-card">
-    <img src="images/burger.jpg" alt="">
     <h3>Classic Burger</h3>
     <p>£5.99</p>
+    <button onclick="addItem('Classic Burger', 5.99)">+ Add</button>
   </div>
 
   <div class="food-card">
-    <img src="images/pizza.jpg" alt="">
     <h3>Cheese Pizza</h3>
     <p>£7.99</p>
+    <button onclick="addItem('Cheese Pizza', 7.99)">+ Add</button>
   </div>
 
   <div class="food-card">
-    <img src="images/pasta.jpg" alt="">
-    <h3>Cream Pasta</h3>
-    <p>£6.99</p>
+    <h3>Fries</h3>
+    <p>£2.99</p>
+    <button onclick="addItem('Fries', 2.99)">+ Add</button>
   </div>
 
   <div class="food-card">
-    <img src="images/drink.jpg" alt="">
     <h3>Soft Drink</h3>
     <p>£1.99</p>
+    <button onclick="addItem('Soft Drink', 1.99)">+ Add</button>
+  </div>
+</section>
+
+<!-- FAVOURITES -->
+<section id="favs" class="menu-items">
+  <a href="menu.html" class="back-btn">← Back</a>
+  <h2>Favourites</h2>
+
+  <div class="food-card">
+    <h3>Classic Burger</h3>
+    <p>£5.99</p>
+    <button onclick="addItem('Classic Burger', 5.99)">+ Add</button>
   </div>
 
+  <div class="food-card">
+    <h3>Cheese Pizza</h3>
+    <p>£7.99</p>
+    <button onclick="addItem('Cheese Pizza', 7.99)">+ Add</button>
+  </div>
 </section>
+
+<!-- VEGETARIAN -->
+<section id="veg" class="menu-items">
+  <a href="menu.html" class="back-btn">← Back</a>
+  <h2>Vegetarian</h2>
+
+  <div class="food-card">
+    <h3>Veg Pasta</h3>
+    <p>£6.49</p>
+    <button onclick="addItem('Veg Pasta', 6.49)">+ Add</button>
+  </div>
+
+  <div class="food-card">
+    <h3>Veg Burger</h3>
+    <p>£5.49</p>
+    <button onclick="addItem('Veg Burger', 5.49)">+ Add</button>
+  </div>
+</section>
+
+<!-- SIDES -->
+<section id="sides" class="menu-items">
+  <a href="menu.html" class="back-btn">← Back</a>
+  <h2>Sides</h2>
+
+  <div class="food-card">
+    <h3>Fries</h3>
+    <p>£2.99</p>
+    <button onclick="addItem('Fries', 2.99)">+ Add</button>
+  </div>
+
+  <div class="food-card">
+    <h3>Garlic Bread</h3>
+    <p>£3.49</p>
+    <button onclick="addItem('Garlic Bread', 3.49)">+ Add</button>
+  </div>
+</section>
+
+<!-- DRINKS -->
+<section id="drinks" class="menu-items">
+  <a href="menu.html" class="back-btn">← Back</a>
+  <h2>Drinks</h2>
+
+  <div class="food-card">
+    <h3>Soft Drink</h3>
+    <p>£1.99</p>
+    <button onclick="addItem('Soft Drink', 1.99)">+ Add</button>
+  </div>
+
+  <div class="food-card">
+    <h3>Milkshake</h3>
+    <p>£2.99</p>
+    <button onclick="addItem('Milkshake', 2.99)">+ Add</button>
+  </div>
+</section>
+
+
 
 <!-- NAVBAR -->
 <header class="navbar">
 
   <ul class="nav-links">
-
     <li class="dropdown">
 
       <input type="checkbox" id="menu-toggle">
@@ -73,7 +142,6 @@
       </ul>
 
     </li>
-
   </ul>
 
   <div class="right-icons">
