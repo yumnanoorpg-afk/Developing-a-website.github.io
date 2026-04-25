@@ -9,15 +9,11 @@
 <body class="basket-page">
 
 <header class="navbar">
-
   <ul class="nav-links">
-
     <li class="dropdown">
-
       <input type="checkbox" id="menu-toggle">
-
       <label for="menu-toggle">
-        <img src="images/dropdown.png" alt="Menu" class="dropdown-icon">
+        <img src="images/dropdown.png" class="dropdown-icon">
       </label>
 
       <ul class="dropdown-menu">
@@ -26,23 +22,52 @@
         <li><a href="menu.html">Menu</a></li>
         <li><a href="basket.html">Basket</a></li>
       </ul>
-
     </li>
-
   </ul>
-
-  <div class="right-icons">
-    <a href="basket.html">
-      <img src="images/basket.png" alt="Basket" class="basket-icon">
-    </a>
-  </div>
-
 </header>
 
-<!-- BASKET CONTENT -->
-<section class="page">
-  <h1>Your Basket</h1>
+<h1>Your Basket</h1>
+
+<section class="items_ordered">
+  <h2>Items Ordered</h2>
+  <ul id="basket-list"></ul>
+  <h2>Total: £<span id="total">0.00</span></h2>
 </section>
+<section>
+  
+</section>
+
+
+<script>
+function loadBasket() {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+  let list = document.getElementById("basket-list");
+  let total = 0;
+
+  list.innerHTML = "";
+
+  if (basket.length === 0) {
+    list.innerHTML = "<li>Your basket is empty</li>";
+    document.getElementById("total").textContent = "0.00";
+    return;
+  }
+
+  basket.forEach(item => {
+    let li = document.createElement("li");
+
+    let itemTotal = item.price * item.quantity;
+    total += itemTotal;
+
+    li.textContent = `${item.name} x${item.quantity} - £${itemTotal.toFixed(2)}`;
+    list.appendChild(li);
+  });
+
+  document.getElementById("total").textContent = total.toFixed(2);
+}
+
+loadBasket();
+</script>
 
 </body>
 </html>
