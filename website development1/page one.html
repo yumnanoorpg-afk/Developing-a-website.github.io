@@ -12,13 +12,12 @@
 <header class="navbar">
 
   <ul class="nav-links">
-
     <li class="dropdown">
 
       <input type="checkbox" id="menu-toggle">
 
       <label for="menu-toggle">
-        <img src="images/dropdown.png" alt="Menu" class="dropdown-icon">
+        <img src="images/dropdown.png" class="dropdown-icon">
       </label>
 
       <ul class="dropdown-menu">
@@ -29,20 +28,20 @@
       </ul>
 
     </li>
-
   </ul>
 
   <div class="right-icons">
     <a href="basket.html">
-      <img src="images/basket.png" alt="Basket" class="basket-icon">
+      <img src="images/basket.png" class="basket-icon">
     </a>
   </div>
 
 </header>
 
+
 <!-- HOME -->
 <section id="home" class="page first-page">
-  <img src="images/TheFront.png" alt="">
+  <img src="images/TheFront.png">
   <h1>Kombu</h1>
 </section>
 
@@ -50,9 +49,19 @@
 <section id="about" class="page about-us">
   <div class="grid-item">
     <h2>About Us</h2>
+    <p>Some random information about Kombu</p>
   </div>
-  <div class="grid-item"></div>
+  <div class="grid-item">
+    <img src="images/food.png">
+  </div>
 </section>
+
+<script>
+if (!sessionStorage.getItem("basketSessionStarted")) {
+  localStorage.removeItem("basket");
+  sessionStorage.setItem("basketSessionStarted", "true");
+}
+</script>
 
 </body>
 </html>
