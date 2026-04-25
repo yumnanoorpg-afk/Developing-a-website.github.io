@@ -8,121 +8,6 @@
 
 <body class="menu-page">
 
-<!-- CATEGORY GRID -->
-<section class="category-grid">
-
-  <a href="#favs" class="category-box">All Time Favourites</a>
-  <a href="#veg" class="category-box">Vegetarian Options</a>
-  <a href="#sides" class="category-box">Sides</a>
-  <a href="#drinks" class="category-box">Drinks</a>
-  <a href="#all" class="category-box">View All</a>
-
-</section>
-<!-- ALL ITEMS -->
-<section id="all" class="menu-items">
-  <a href="menu.html" class="back-btn">← Back</a>
-  <h2>All Items</h2>
-
-  <div class="food-card">
-    <h3>Classic Burger</h3>
-    <p>£5.99</p>
-    <button onclick="addItem('Classic Burger', 5.99)">+ Add</button>
-  </div>
-
-  <div class="food-card">
-    <h3>Cheese Pizza</h3>
-    <p>£7.99</p>
-    <button onclick="addItem('Cheese Pizza', 7.99)">+ Add</button>
-  </div>
-
-  <div class="food-card">
-    <h3>Fries</h3>
-    <p>£2.99</p>
-    <button onclick="addItem('Fries', 2.99)">+ Add</button>
-  </div>
-
-  <div class="food-card">
-    <h3>Soft Drink</h3>
-    <p>£1.99</p>
-    <button onclick="addItem('Soft Drink', 1.99)">+ Add</button>
-  </div>
-</section>
-
-<!-- FAVOURITES -->
-<section id="favs" class="menu-items">
-  <a href="menu.html" class="back-btn">← Back</a>
-  <h2>Favourites</h2>
-
-  <div class="food-card">
-    <h3>Classic Burger</h3>
-    <p>£5.99</p>
-    <button onclick="addItem('Classic Burger', 5.99)">+ Add</button>
-  </div>
-
-  <div class="food-card">
-    <h3>Cheese Pizza</h3>
-    <p>£7.99</p>
-    <button onclick="addItem('Cheese Pizza', 7.99)">+ Add</button>
-  </div>
-</section>
-
-<!-- VEGETARIAN -->
-<section id="veg" class="menu-items">
-  <a href="menu.html" class="back-btn">← Back</a>
-  <h2>Vegetarian</h2>
-
-  <div class="food-card">
-    <h3>Veg Pasta</h3>
-    <p>£6.49</p>
-    <button onclick="addItem('Veg Pasta', 6.49)">+ Add</button>
-  </div>
-
-  <div class="food-card">
-    <h3>Veg Burger</h3>
-    <p>£5.49</p>
-    <button onclick="addItem('Veg Burger', 5.49)">+ Add</button>
-  </div>
-</section>
-
-<!-- SIDES -->
-<section id="sides" class="menu-items">
-  <a href="menu.html" class="back-btn">← Back</a>
-  <h2>Sides</h2>
-
-  <div class="food-card">
-    <h3>Fries</h3>
-    <p>£2.99</p>
-    <button onclick="addItem('Fries', 2.99)">+ Add</button>
-  </div>
-
-  <div class="food-card">
-    <h3>Garlic Bread</h3>
-    <p>£3.49</p>
-    <button onclick="addItem('Garlic Bread', 3.49)">+ Add</button>
-  </div>
-</section>
-
-<!-- DRINKS -->
-<section id="drinks" class="menu-items">
-  <a href="menu.html" class="back-btn">← Back</a>
-  <h2>Drinks</h2>
-
-  <div class="food-card">
-    <h3>Soft Drink</h3>
-    <p>£1.99</p>
-    <button onclick="addItem('Soft Drink', 1.99)">+ Add</button>
-  </div>
-
-  <div class="food-card">
-    <h3>Milkshake</h3>
-    <p>£2.99</p>
-    <button onclick="addItem('Milkshake', 2.99)">+ Add</button>
-  </div>
-</section>
-
-
-
-<!-- NAVBAR -->
 <header class="navbar">
 
   <ul class="nav-links">
@@ -131,7 +16,7 @@
       <input type="checkbox" id="menu-toggle">
 
       <label for="menu-toggle">
-        <img src="images/dropdown.png" alt="Menu" class="dropdown-icon">
+        <img src="images/dropdown.png" class="dropdown-icon">
       </label>
 
       <ul class="dropdown-menu">
@@ -141,16 +26,118 @@
         <li><a href="basket.html">Basket</a></li>
       </ul>
 
+      
+  </div>
+
     </li>
   </ul>
 
   <div class="right-icons">
     <a href="basket.html">
-      <img src="images/basket.png" alt="Basket" class="basket-icon">
+      <img src="images/basket.png" class="basket-icon">
     </a>
   </div>
 
 </header>
+
+<!-- SEARCH -->
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search food...">
+</div>
+
+<!-- CATEGORY -->
+<section class="category-grid">
+  <a href="#" onclick="filterCategory('all', this)" class="category-box active">All</a>
+  <a href="#" onclick="filterCategory('favs', this)" class="category-box">Favourites</a>
+  <a href="#" onclick="filterCategory('veg', this)" class="category-box">Vegetarian</a>
+  <a href="#" onclick="filterCategory('sides', this)" class="category-box">Sides</a>
+  <a href="#" onclick="filterCategory('drinks', this)" class="category-box">Drinks</a>
+</section>
+
+<!-- MENU -->
+<section class="menu-items">
+  <h2>Menu</h2>
+  <div class="container" id="menuContainer"></div>
+</section>
+
+<script>
+const menuItems = [
+  { name: "Classic Burger", price: 5.99, category: "favs" },
+  { name: "Cheese Pizza", price: 7.99, category: "favs" },
+  { name: "Veg Pasta", price: 6.49, category: "veg" },
+  { name: "Veg Burger", price: 5.49, category: "veg" },
+  { name: "Fries", price: 2.99, category: "sides" },
+  { name: "Garlic Bread", price: 3.49, category: "sides" },
+  { name: "Soft Drink", price: 1.99, category: "drinks" },
+  { name: "Milkshake", price: 2.99, category: "drinks" }
+];
+
+let currentItems = [...menuItems];
+
+function createCard(item) {
+  const card = document.createElement("div");
+  card.className = "food-card";
+
+  card.innerHTML = `
+    <h3>${item.name}</h3>
+    <p>£${item.price.toFixed(2)}</p>
+    <button class="add-btn">+ Add</button>
+  `;
+
+  card.querySelector("button").onclick = () => addItem(item);
+  return card;
+}
+
+function renderMenu(items) {
+  const container = document.getElementById("menuContainer");
+  container.innerHTML = "";
+  items.forEach(i => container.appendChild(createCard(i)));
+}
+
+function filterCategory(category, el) {
+  document.querySelectorAll(".category-box").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+
+  currentItems = category === "all"
+    ? [...menuItems]
+    : menuItems.filter(i => i.category === category);
+
+  applySearch();
+}
+
+document.getElementById("searchInput").addEventListener("input", applySearch);
+
+function applySearch() {
+  const value = document.getElementById("searchInput").value.toLowerCase();
+
+  const filtered = currentItems.filter(i =>
+    i.name.toLowerCase().includes(value)
+  );
+
+  renderMenu(filtered);
+}
+
+function addItem(item) {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+  let existing = basket.find(i => i.name === item.name);
+
+  if (existing) existing.quantity++;
+  else basket.push({ ...item, quantity: 1 });
+
+  localStorage.setItem("basket", JSON.stringify(basket));
+  updateBasketCount();
+}
+
+function updateBasketCount() {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  document.getElementById("basket-count").textContent =
+    basket.reduce((s, i) => s + i.quantity, 0);
+}
+
+renderMenu(menuItems);
+updateBasketCount();
+</script>
 
 </body>
 </html>
