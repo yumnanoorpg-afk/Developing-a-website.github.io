@@ -46,7 +46,14 @@ body.basket-page .dropdown-menu a[href="basket.html"] {
   padding: 0 20px;
   z-index: 1000;
 }
-
+.basket_title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  margin: 0;
+  line-height: 70px; /* vertically center */
+}
 .nav-links {
   list-style: none;
   display: flex;
@@ -200,28 +207,7 @@ body.basket-page .dropdown-menu a[href="basket.html"] {
   background: #333;
 }
 
-/* =======================
-   BASKET BADGE
-======================= */
-.basket-wrapper {
-  position: relative;
-}
 
-#basket-count {
-  position: absolute;
-  top: -6px;
-  right: -6px;
-  background: red;
-  color: white;
-  font-size: 12px;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-}
 
 /* =======================
    ABOUT PAGE
@@ -256,21 +242,65 @@ body.basket-page .dropdown-menu a[href="basket.html"] {
 /* =======================
    BASKET PAGE
 ======================= */
-body.basket-page {
-  background: #000;
-  color: #fff;
+body {
+  background: black;
+  color: white;
+  font-family: Arial, sans-serif;
 }
 
-#basket-list {
-  list-style: none;
-  padding: 0;
+/* MAIN GRID */
+.basket-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* left bigger than right */
+  grid-template-rows: auto auto;
+  gap: 20px;
+  padding: 20px;
 }
 
-#basket-list li {
-  background: #111;
-  margin-bottom: 10px;
-  padding: 12px;
-  border-radius: 8px;
+/* TOP BOX (full width) */
+.items_ordered {
+  grid-column: 1 / 3; /* spans both columns */
+  background: orange;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* LEFT BOX */
+.order_details {
+  background: orange;
+  padding: 20px;
+  border-radius: 20px;
+
+  display: grid;
+  gap: 10px;
+}
+
+/* RIGHT BOX */
+.total_and_payment {
+  background: orange;
+  padding: 20px;
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* INPUT STYLE (to match rounded look) */
+input {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+}
+
+/* BUTTON */
+button {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  background: black;
+  color: white;
+  cursor: pointer;
 }
 
 /* =======================
