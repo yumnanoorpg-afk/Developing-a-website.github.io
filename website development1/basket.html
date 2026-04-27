@@ -9,6 +9,7 @@
 <body class="basket-page">
 
 <header class="navbar">
+  <h1 class="basket_title">Basket</h1>
   <ul class="nav-links">
     <li class="dropdown">
       <input type="checkbox" id="menu-toggle">
@@ -26,16 +27,35 @@
   </ul>
 </header>
 
-<h1>Your Basket</h1>
 
-<section class="items_ordered">
-  <h2>Items Ordered</h2>
-  <ul id="basket-list"></ul>
-  <h2>Total: £<span id="total">0.00</span></h2>
-</section>
-<section>
-  
-</section>
+
+<div class="basket-container">
+
+  <!-- TOP: items -->
+  <section class="items_ordered">
+    <h2>Items Ordered</h2>
+    <ul id="basket-list"></ul>
+  </section>
+
+  <!-- LEFT: order details -->
+  <section class="order_details">
+   
+<input type="text" id="name" required><!-- required = user MUST fill this before submitting -->
+<input type="date" id="date" required><!-- browser gives calendar + forces selection -->
+<input type="time" id="time" required><!-- browser gives time picker -->
+<input type="text" id="phone" required pattern="[0-9]{10,11}"><!-- pattern = only allows 10–11 digits -->
+
+  </section>
+
+  <!-- RIGHT: total + pay -->
+  <section class="total_and_payment">
+    <h2>Total Price</h2>
+    <p>£<span id="total">0.00</span></p>
+    <button onclick="checkout()">Pay</button>
+  </section>
+
+</div>
+
 
 
 <script>
@@ -67,6 +87,48 @@ function loadBasket() {
 }
 
 loadBasket();
+function checkout() {
+
+  // Get values from inputs
+  let name = document.getElementById("name").value.trim();
+  // .trim() removes spaces so "   " isn't accepted
+
+  let date = document.getElementById("date").value;
+  let time = document.getElementById("time").value;
+  let phone = document.getElementById("phone").value.trim();
+
+  // Get basket from localStorage
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  // if nothing exists → default to empty array []
+
+
+  // CHECK 1: Basket not empty
+  if (basket.length === 0) {
+    alert("Your basket is empty!");
+    return; 
+    // stops function running further
+  }
+
+  // CHECK 2: All fields filled
+  if (!name || !date || !time || !phone) {
+    alert("Please fill in all details!");
+    return;
+  }
+  // CHECK 3: Phone format valid
+  if (!/^[0-9]{10,11}$/.test(phone)) {
+    alert("Enter a valid phone number!");
+    return;
+  }
+
+  // SUCCESS CASE
+  alert("Order placed successfully!");
+
+  // Clear basket after payment
+  localStorage.removeItem("basket");
+
+  // Reload page so UI resets
+  window.location.reload();
+}
 </script>
 
 </body>
