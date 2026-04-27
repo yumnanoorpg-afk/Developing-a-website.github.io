@@ -26,15 +26,13 @@
         <li><a href="basket.html">Basket</a></li>
       </ul>
 
-      
-  </div>
-
     </li>
   </ul>
 
   <div class="right-icons">
     <a href="basket.html">
       <img src="images/basket.png" class="basket-icon">
+      <span id="basket-count">0</span>
     </a>
   </div>
 
@@ -48,8 +46,9 @@
 <!-- CATEGORY -->
 <section class="category-grid">
   <a href="#" onclick="filterCategory('all', this)" class="category-box active">All</a>
-  <a href="#" onclick="filterCategory('favs', this)" class="category-box">Favourites</a>
-  <a href="#" onclick="filterCategory('veg', this)" class="category-box">Vegetarian</a>
+  <a href="#" onclick="filterCategory('starters', this)" class="category-box">Starters</a>
+  <a href="#" onclick="filterCategory('bao', this)" class="category-box">Bao Buns</a>
+  <a href="#" onclick="filterCategory('donburi', this)" class="category-box">Donburi</a>
   <a href="#" onclick="filterCategory('sides', this)" class="category-box">Sides</a>
   <a href="#" onclick="filterCategory('drinks', this)" class="category-box">Drinks</a>
 </section>
@@ -61,30 +60,89 @@
 </section>
 
 <script>
+
 const menuItems = [
-  { name: "Classic Burger", price: 5.99, category: "favs" },
-  { name: "Cheese Pizza", price: 7.99, category: "favs" },
-  { name: "Veg Pasta", price: 6.49, category: "veg" },
-  { name: "Veg Burger", price: 5.49, category: "veg" },
-  { name: "Fries", price: 2.99, category: "sides" },
-  { name: "Garlic Bread", price: 3.49, category: "sides" },
-  { name: "Soft Drink", price: 1.99, category: "drinks" },
-  { name: "Milkshake", price: 2.99, category: "drinks" }
+  { name: "Crispy Chicken Gyoza", price: 4.99, category: "starters", image: "images/chicken-gyoza.png" },
+  { name: "Tofu & Vegetable Gyoza", price: 3.50, category: "starters", image: "images/veg-gyoza.png" },
+  { name: "Prawn & Seaweed Roll", price: 3.80, category: "starters", image: "images/prawn-roll.png" },
+  { name: "Miso Soup", price: 2.50, category: "starters", image: "images/miso-soup.png" },
+  { name: "Chef Special Salad", price: 4.80, category: "starters", image: "images/salad.png" },
+
+  { name: "Chicken Bao Bun", price: 3.50, category: "bao", image: "images/chicken-bao.png" },
+  { name: "Pork Bao Bun", price: 3.80, category: "bao", image: "images/pork-bao.png" },
+  { name: "Prawn Bao Bun", price: 3.80, category: "bao", image: "images/prawn-bao.png" },
+  { name: "Pumpkin Bao Bun", price: 3.50, category: "bao", image: "images/pumpkin-bao.png" },
+
+  { name: "Chicken Teriyaki Donburi", price: 8.50, category: "donburi", image: "images/chicken-teriyaki.png" },
+  { name: "Chicken Katsu Curry Donburi", price: 8.90, category: "donburi", image: "images/katsu-curry.png" },
+  { name: "Spicy Pork Donburi", price: 8.90, category: "donburi", image: "images/spicy-pork.png" },
+  { name: "Crispy Tofu Donburi", price: 7.90, category: "donburi", image: "images/tofu-donburi.png" },
+  { name: "Teriyaki Salmon Donburi", price: 9.50, category: "donburi", image: "images/salmon-teriyaki.png" },
+  { name: "Unagi (Grilled Eel) Donburi", price: 10.50, category: "donburi", image: "images/unagi.png" },
+  { name: "Tempura Prawn Donburi", price: 9.20, category: "donburi", image: "images/tempura-prawn.png" },
+  { name: "Mixed Vegetable Tempura Donburi", price: 7.80, category: "donburi", image: "images/veg-tempura.png" },
+
+  { name: "Edamame", price: 3.00, category: "sides", image: "images/edamame.png" },
+  { name: "Seaweed Salad", price: 3.50, category: "sides", image: "images/seaweed.png" },
+  { name: "Rice", price: 2.00, category: "sides", image: "images/rice.png" },
+
+  { name: "Green Tea", price: 2.00, category: "drinks", image: "images/green-tea.png" },
+  { name: "Soft Drink", price: 1.80, category: "drinks", image: "images/soft-drink.png" }
 ];
 
+function getBasket() {
+  return JSON.parse(localStorage.getItem("basket")) || [];
+}
+
+function saveBasket(basket) {
+  localStorage.setItem("basket", JSON.stringify(basket));
+  updateBasketCount();
+}
+
+function updateBasketCount() {
+  let basket = getBasket();
+  let count = basket.reduce((sum, item) => sum + item.quantity, 0);
+
+  let el = document.getElementById("basket-count");
+  if (el) el.textContent = count;
+}
+
 let currentItems = [...menuItems];
+
+function getItemQuantity(name) {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  let item = basket.find(i => i.name === name);
+  return item ? item.quantity : 0;
+}
 
 function createCard(item) {
   const card = document.createElement("div");
   card.className = "food-card";
 
+  const quantity = getItemQuantity(item.name);
+
   card.innerHTML = `
+    <img src="${item.image}" alt="${item.name}">
     <h3>${item.name}</h3>
     <p>£${item.price.toFixed(2)}</p>
-    <button class="add-btn">+ Add</button>
+
+    <div class="quantity-controls">
+      <button class="minus-btn">−</button>
+      <span class="qty">${quantity}</span>
+      <button class="plus-btn">+</button>
+    </div>
   `;
 
-  card.querySelector("button").onclick = () => addItem(item);
+  card.querySelector(".plus-btn").onclick = () => {
+    addItem(item);
+    updateUI();
+  };
+
+  card.querySelector(".minus-btn").onclick = () => {
+    removeItem(item);
+    updateUI();
+  };
+
   return card;
 }
 
@@ -126,7 +184,21 @@ function addItem(item) {
   else basket.push({ ...item, quantity: 1 });
 
   localStorage.setItem("basket", JSON.stringify(basket));
-  updateBasketCount();
+}
+
+function removeItem(item) {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+  let existing = basket.find(i => i.name === item.name);
+  if (!existing) return;
+
+  existing.quantity--;
+
+  if (existing.quantity <= 0) {
+    basket = basket.filter(i => i.name !== item.name);
+  }
+
+  localStorage.setItem("basket", JSON.stringify(basket));
 }
 
 function updateBasketCount() {
@@ -135,8 +207,14 @@ function updateBasketCount() {
     basket.reduce((s, i) => s + i.quantity, 0);
 }
 
+function updateUI() {
+  applySearch();
+  updateBasketCount();
+}
+
 renderMenu(menuItems);
 updateBasketCount();
+
 </script>
 
 </body>
