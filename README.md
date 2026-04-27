@@ -12,3 +12,4 @@ One issue with the initial game platform was that the basket was already showing
 
 Another issue that stood out was that user could place a order with entering their detial(e.g. date, time, phone number). This was fixed by implimenting Javascript again and making sure the order does not go through if those areas are not filled.
 
+one more issue was there was no way to remove items from the basket and the users had to relocate the item in the menu to remove a food item.
