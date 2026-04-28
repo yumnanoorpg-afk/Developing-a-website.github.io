@@ -1,3 +1,4 @@
+<!--general code learnded through W3Schools-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,10 +57,52 @@
 
 </div>
 
+  <!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-section">
+      <h3>Kombu Stevenage</h3>
+      <p>Fresh food, made daily.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>📞 01438 123456</p>
+      <p>📧 info@kombu.co.uk</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Address</h4>
+      <p>123 High Street</p>
+      <p>Stevenage</p>
+      <p>Hertfordshire</p>
+      <p>SG1 1AA</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Kombu. All rights reserved.</p>
+  </div>
+</footer>
 
 
-<script>
-  
+<script>// code refrenced from youtuber Web Dev Simplified 
+// video link:https://youtu.be/YeFzkC2awTM?si=9kX5xyaGtyPUrBO4-->
+
+//////////////////////////////
+// SESSION RESET 
+//////////////////////////////
+
+if (!sessionStorage.getItem("sessionStarted")) {
+  localStorage.removeItem("basket"); // clears old basket once per session
+  sessionStorage.setItem("sessionStarted", "true");
+}
+
+//////////////////////////////
+// BASKET STORAGE
+//////////////////////////////
 
 function getBasket() {
   return JSON.parse(localStorage.getItem("basket")) || [];
@@ -70,6 +113,10 @@ function saveBasket(basket) {
   updateBasketCount();
 }
 
+//////////////////////////////
+// COUNT DISPLAY
+//////////////////////////////
+
 function updateBasketCount() {
   let basket = getBasket();
   let count = basket.reduce((sum, item) => sum + item.quantity, 0);
@@ -78,8 +125,12 @@ function updateBasketCount() {
   if (el) el.textContent = count;
 }
 
+//////////////////////////////
+// LOAD BASKET UI
+//////////////////////////////
+
 function loadBasket() {
-  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  let basket = getBasket();
 
   let list = document.getElementById("basket-list");
   let total = 0;
@@ -116,18 +167,22 @@ function loadBasket() {
   document.getElementById("total").textContent = total.toFixed(2);
 }
 
+//////////////////////////////
+// MODIFY ITEMS 
+//////////////////////////////
+
 function increaseItem(name) {
-  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  let basket = getBasket();
 
   let item = basket.find(i => i.name === name);
   if (item) item.quantity++;
 
-  localStorage.setItem("basket", JSON.stringify(basket));
+  saveBasket(basket);
   loadBasket();
 }
 
 function decreaseItem(name) {
-  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  let basket = getBasket();
 
   let item = basket.find(i => i.name === name);
   if (!item) return;
@@ -138,12 +193,13 @@ function decreaseItem(name) {
     basket = basket.filter(i => i.name !== name);
   }
 
-  localStorage.setItem("basket", JSON.stringify(basket));
+  saveBasket(basket);
   loadBasket();
 }
 
-loadBasket();
-
+//////////////////////////////
+// CHECKOUT
+//////////////////////////////
 
 function checkout() {
 
@@ -152,7 +208,7 @@ function checkout() {
   let time = document.getElementById("time").value;
   let phone = document.getElementById("phone").value.trim();
 
-  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  let basket = getBasket();
 
   if (basket.length === 0) {
     alert("Your basket is empty!");
@@ -172,9 +228,15 @@ function checkout() {
   alert("Order placed successfully!");
 
   localStorage.removeItem("basket");
+  sessionStorage.removeItem("sessionStarted");
+
   window.location.reload();
 }
-</script>
 
+
+
+loadBasket();
+
+</script>
 </body>
 </html>
