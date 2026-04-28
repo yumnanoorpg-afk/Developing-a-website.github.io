@@ -1,3 +1,4 @@
+<!--general code learnded through W3Schools-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,6 +60,36 @@
   <div class="container" id="menuContainer"></div>
 </section>
 
+  <!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-section">
+      <h3>Kombu Stevenage</h3>
+      <p>Fresh food, made daily.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>📞 01438 123456</p>
+      <p>📧 info@kombu.co.uk</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Address</h4>
+      <p>123 High Street</p>
+      <p>Stevenage</p>
+      <p>Hertfordshire</p>
+      <p>SG1 1AA</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Kombu. All rights reserved.</p>
+  </div>
+</footer>
+
 <script>
 
 const menuItems = [
@@ -88,7 +119,13 @@ const menuItems = [
 
   { name: "Green Tea", price: 2.00, category: "drinks", image: "images/green-tea.png" },
   { name: "Soft Drink", price: 1.80, category: "drinks", image: "images/soft-drink.png" }
+
 ];
+
+////
+// code refrenced from youtuber Web Dev Simplified 
+// video link:https://youtu.be/YeFzkC2awTM?si=9kX5xyaGtyPUrBO4
+////
 
 function getBasket() {
   return JSON.parse(localStorage.getItem("basket")) || [];
