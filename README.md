@@ -2,6 +2,18 @@
 Assignment 2 of Designing for User Experience module 
 
 ____Design____________________________________________
+Aims and Objectives
+The aim of this project is to design and develop a central, accessible website for Kombu that provides all essential restaurant information in one place and simulates an online ordering experience. 
+
+The website is intended to solve the current lack of an official online presence. At present, Kombu only exists through a Google Maps listing and a Facebook page, which limits how easily customers can access reliable and up-to-date information. Users are unable to consistently view menus, check prices, or confirm details before visiting, which can reduce trust and discourage potential customers. 
+
+To address this, the website will aim to: 
+Provide a single, reliable source of information for menu items, prices, and restaurant details  
+Allow users to browse food items quickly and efficiently  
+Include a simple ordering/basket system to simulate a real ordering experience  
+Ensure clear and intuitive navigation between sections  
+Prioritise accessibility through high-contrast design and readable layouts  
+Minimise distractions to support users with cognitive conditions such as ADHD 
 
 User Stories
 
