@@ -1,0 +1,242 @@
+<!--general code learnded through W3Schools-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Kombu Basket</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="basket-page">
+
+<header class="navbar">
+  <h1 class="basket_title">Basket</h1>
+  <ul class="nav-links">
+    <li class="dropdown">
+      <input type="checkbox" id="menu-toggle">
+      <label for="menu-toggle">
+        <img src="images/dropdown.png" class="dropdown-icon">
+      </label>
+
+      <ul class="dropdown-menu">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="basket.html">Basket</a></li>
+      </ul>
+    </li>
+  </ul>
+</header>
+
+
+
+<div class="basket-container">
+
+  <!-- TOP: items -->
+  <section class="items_ordered">
+    <h2>Items Ordered</h2>
+    <ul id="basket-list"></ul>
+  </section>
+
+  <!-- LEFT: order details -->
+  <section class="order_details">
+   
+<input type="text" id="name" required><!-- required = user MUST fill this before submitting -->
+<input type="date" id="date" required><!-- browser gives calendar + forces selection -->
+<input type="time" id="time" required><!-- browser gives time picker -->
+<input type="text" id="phone" required pattern="[0-9]{10,11}"><!-- pattern = only allows 10–11 digits -->
+
+  </section>
+
+  <!-- RIGHT: total + pay -->
+  <section class="total_and_payment">
+    <h2>Total Price</h2>
+    <p>£<span id="total">0.00</span></p>
+    <button onclick="checkout()">Pay</button>
+  </section>
+
+</div>
+
+  <!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-section">
+      <h3>Kombu Stevenage</h3>
+      <p>Fresh food, made daily.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>📞 01438 123456</p>
+      <p>📧 info@kombu.co.uk</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Address</h4>
+      <p>123 High Street</p>
+      <p>Stevenage</p>
+      <p>Hertfordshire</p>
+      <p>SG1 1AA</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Kombu. All rights reserved.</p>
+  </div>
+</footer>
+
+
+<script>// code refrenced from youtuber Web Dev Simplified 
+// video link:https://youtu.be/YeFzkC2awTM?si=9kX5xyaGtyPUrBO4-->
+
+//////////////////////////////
+// SESSION RESET 
+//////////////////////////////
+
+if (!sessionStorage.getItem("sessionStarted")) {
+  localStorage.removeItem("basket"); // clears old basket once per session
+  sessionStorage.setItem("sessionStarted", "true");
+}
+
+//////////////////////////////
+// BASKET STORAGE
+//////////////////////////////
+
+function getBasket() {
+  return JSON.parse(localStorage.getItem("basket")) || [];
+}
+
+function saveBasket(basket) {
+  localStorage.setItem("basket", JSON.stringify(basket));
+  updateBasketCount();
+}
+
+//////////////////////////////
+// COUNT DISPLAY
+//////////////////////////////
+
+function updateBasketCount() {
+  let basket = getBasket();
+  let count = basket.reduce((sum, item) => sum + item.quantity, 0);
+
+  let el = document.getElementById("basket-count");
+  if (el) el.textContent = count;
+}
+
+//////////////////////////////
+// LOAD BASKET UI
+//////////////////////////////
+
+function loadBasket() {
+  let basket = getBasket();
+
+  let list = document.getElementById("basket-list");
+  let total = 0;
+
+  list.innerHTML = "";
+
+  if (basket.length === 0) {
+    list.innerHTML = "<li>Your basket is empty</li>";
+    document.getElementById("total").textContent = "0.00";
+    return;
+  }
+
+  basket.forEach(item => {
+    let li = document.createElement("li");
+
+    let itemTotal = item.price * item.quantity;
+    total += itemTotal;
+
+    li.innerHTML = `
+      <span>${item.name}</span>
+
+      <div class="basket-controls">
+        <button onclick="decreaseItem('${item.name}')">−</button>
+        <span>${item.quantity}</span>
+        <button onclick="increaseItem('${item.name}')">+</button>
+      </div>
+
+      <span>£${itemTotal.toFixed(2)}</span>
+    `;
+
+    list.appendChild(li);
+  });
+
+  document.getElementById("total").textContent = total.toFixed(2);
+}
+
+//////////////////////////////
+// MODIFY ITEMS 
+//////////////////////////////
+
+function increaseItem(name) {
+  let basket = getBasket();
+
+  let item = basket.find(i => i.name === name);
+  if (item) item.quantity++;
+
+  saveBasket(basket);
+  loadBasket();
+}
+
+function decreaseItem(name) {
+  let basket = getBasket();
+
+  let item = basket.find(i => i.name === name);
+  if (!item) return;
+
+  item.quantity--;
+
+  if (item.quantity <= 0) {
+    basket = basket.filter(i => i.name !== name);
+  }
+
+  saveBasket(basket);
+  loadBasket();
+}
+
+//////////////////////////////
+// CHECKOUT
+//////////////////////////////
+
+function checkout() {
+
+  let name = document.getElementById("name").value.trim();
+  let date = document.getElementById("date").value;
+  let time = document.getElementById("time").value;
+  let phone = document.getElementById("phone").value.trim();
+
+  let basket = getBasket();
+
+  if (basket.length === 0) {
+    alert("Your basket is empty!");
+    return;
+  }
+
+  if (!name || !date || !time || !phone) {
+    alert("Please fill in all details!");
+    return;
+  }
+
+  if (!/^[0-9]{10,11}$/.test(phone)) {
+    alert("Enter a valid phone number!");
+    return;
+  }
+
+  alert("Order placed successfully!");
+
+  localStorage.removeItem("basket");
+  sessionStorage.removeItem("sessionStarted");
+
+  window.location.reload();
+}
+
+
+
+loadBasket();
+
+</script>
+</body>
+</html>

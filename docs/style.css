@@ -1,0 +1,446 @@
+/*general code learnded through W3Schools*/
+
+
+
+/* =======================
+   BASE RESET
+======================= */
+body {
+  margin: 0;
+  padding-top: 70px;
+  font-family: Arial, sans-serif;
+  background: #000;
+  color: #fff;
+  scroll-behavior: smooth;
+}
+
+/* =======================
+   ACTIVE NAVIGATION
+======================= */
+html:has(#home:target) a[href="#home"],
+html:has(#about:target) a[href="#about"] {
+  color: #FFA500;
+  border-bottom: 2px solid #FFA500;
+}
+
+body.menu-page a[href="menu.html"],
+body.menu-page .dropdown-menu a[href="menu.html"] {
+  color: #FFA500;
+  border-bottom: 2px solid #FFA500;
+}
+
+body.basket-page a[href="basket.html"],
+body.basket-page .dropdown-menu a[href="basket.html"] {
+  color: #FFA500;
+  border-bottom: 2px solid #FFA500;
+}
+
+/* =======================
+   NAVBAR
+======================= */
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background: black;
+
+  display: flex;/* css flexbox  learned by youtuber coding2go video link: https://youtu.be/wsTv9y931o8?si=KhQ6CPkFvylxmLtn*/
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 15px;
+  box-sizing: border-box;
+  z-index: 1000;
+}
+
+
+.basket_title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  line-height: 70px;
+  pointer-events: none;
+}
+
+.right-icons {
+  display: flex;
+  align-items: center;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.dropdown-icon,
+.basket-icon {
+  height: 40px;
+  cursor: pointer;
+}
+
+#basket-count {
+  color: white;
+  font-weight: bold;
+}
+
+/* =======================
+   DROPDOWN
+======================= */
+#menu-toggle {
+  display: none;
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background: black;
+  min-width: 180px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #222;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px;
+  color: white;
+  text-decoration: none;
+  border-bottom: 1px solid #222;
+}
+
+#menu-toggle:checked ~ .dropdown-menu {
+  display: block;
+}
+
+/* =======================
+  Home page  
+  css grid system learned by a youtuber coding2go video link: https://youtu.be/JYfiaSKeYhE?si=O19veApAngUH8LMX
+======================= */
+.first-page {
+  position: relative;
+  height: calc(100vh - 70px);
+  overflow: hidden;
+}
+
+.first-page img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.first-page h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+  color: #FFA500;
+  -webkit-text-stroke: 2px black;
+}
+
+/* ABOUT SECTION */
+.about_title{color: orange;}
+.about-us.page {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: calc(100vh - 70px);
+  align-items: center;
+}
+
+.about-us .grid-item:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 60px;
+}
+
+.about-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.about-right img {
+  width: 80%;
+  max-width: 400px;
+  height: auto;
+}
+
+.menu-link-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #FFA500;
+  color: black;
+  text-decoration: none;
+  border-radius: 20px;
+  font-weight: bold;
+}
+
+.menu-link-btn:hover {
+  background: #ffb300;
+  transform: scale(1.05);
+}
+
+/* =======================
+   SEARCH
+======================= */
+.search-container {
+  text-align: center;
+  margin: 15px 0;
+}
+
+#searchInput {
+  width: 80%;
+  max-width: 420px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #444;
+}
+
+/* =======================
+   CATEGORY BAR
+======================= */
+.category-grid {
+  display: flex;
+  gap: 10px;
+  padding: 20px;
+  overflow-x: auto;
+}
+
+.category-box {
+  flex: 1;
+  text-align: center;
+  white-space: nowrap;
+  padding: 15px;
+  background: #111;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+.category-box:hover {
+  background: #222;
+}
+
+.category-box.active {
+  background: #FFA500;
+  color: black;
+  font-weight: bold;
+}
+
+/* =======================
+   MENU GRID
+======================= */
+.container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.food-card {
+  background: white;
+  color: black;
+  padding: 12px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.food-card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+/* quantity controls */
+.quantity-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.quantity-controls button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  background: orange;
+  color: white;
+  cursor: pointer;
+}
+
+.qty {
+  font-weight: bold;
+}
+
+
+
+/* =======================
+   BASKET PAGE (FIXED PROPERLY)
+======================= */
+.basket-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+
+.items_ordered {
+  grid-column: 1 / 3;
+  background: #FFA500;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+/* basket list */
+#basket-list {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+/* ITEM ROWS  */
+#basket-list li {
+  display: grid;
+  grid-template-columns: 2fr 1fr auto;
+  align-items: center;
+
+  width: 100%;
+  box-sizing: border-box;
+
+  background: white;
+  color: black;
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  gap: 15px;
+}
+
+/* basket controls */
+.basket-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.basket-controls button {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+
+/* order + payment */
+.order_details,
+.total_and_payment {
+  background: #FFA500;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+.order_details {
+  display: grid;
+  gap: 10px;
+}
+
+.total_and_payment {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* inputs */
+input {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+}
+
+/* buttons */
+button {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  background: black;
+  color: white;
+  cursor: pointer;
+}
+
+
+
+
+/* =======================
+   FOOTER
+======================= */
+.footer {
+  background: #000;
+  color: #fff;
+  padding: 40px 20px 20px;
+}
+
+.footer-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  padding: 0 40px;
+  width: 100%;
+
+  justify-content: space-between;
+}
+
+.footer-section h3,
+.footer-section h4 {
+  margin-bottom: 10px;
+}
+
+.footer-section p {
+  margin: 5px 0;
+  font-size: 14px;
+  color: #ccc;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 30px;
+  border-top: 1px solid #333;
+  padding-top: 15px;
+  font-size: 13px;
+  color: #aaa;
+}
+
+/* =======================
+   MOBILE
+======================= */
+@media (max-width: 768px) {
+  .category-grid {
+    overflow-x: auto;
+  }
+
+  .about-us.page {
+    grid-template-columns: 1fr;
+  }
+
+  .basket-container {
+    grid-template-columns: 1fr;
+  }
+}

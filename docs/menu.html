@@ -1,0 +1,258 @@
+<!--general code learnded through W3Schools-->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Kombu Menu</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="menu-page">
+
+<header class="navbar">
+
+  <ul class="nav-links">
+    <li class="dropdown">
+
+      <input type="checkbox" id="menu-toggle">
+
+      <label for="menu-toggle">
+        <img src="images/dropdown.png" class="dropdown-icon">
+      </label>
+
+      <ul class="dropdown-menu">
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="menu.html">Menu</a></li>
+        <li><a href="basket.html">Basket</a></li>
+      </ul>
+
+    </li>
+  </ul>
+
+  <div class="right-icons">
+    <a href="basket.html">
+      <img src="images/basket.png" class="basket-icon">
+      <span id="basket-count">0</span>
+    </a>
+  </div>
+
+</header>
+
+<!-- SEARCH -->
+<div class="search-container">
+  <input type="text" id="searchInput" placeholder="Search food...">
+</div>
+
+<!-- CATEGORY -->
+<section class="category-grid">
+  <a href="#" onclick="filterCategory('all', this)" class="category-box active">All</a>
+  <a href="#" onclick="filterCategory('starters', this)" class="category-box">Starters</a>
+  <a href="#" onclick="filterCategory('bao', this)" class="category-box">Bao Buns</a>
+  <a href="#" onclick="filterCategory('donburi', this)" class="category-box">Donburi</a>
+  <a href="#" onclick="filterCategory('sides', this)" class="category-box">Sides</a>
+  <a href="#" onclick="filterCategory('drinks', this)" class="category-box">Drinks</a>
+</section>
+
+<!-- MENU -->
+<section class="menu-items">
+  <h2>Menu</h2>
+  <div class="container" id="menuContainer"></div>
+</section>
+
+  <!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-section">
+      <h3>Kombu Stevenage</h3>
+      <p>Fresh food, made daily.</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Contact</h4>
+      <p>📞 01438 123456</p>
+      <p>📧 info@kombu.co.uk</p>
+    </div>
+
+    <div class="footer-section">
+      <h4>Address</h4>
+      <p>123 High Street</p>
+      <p>Stevenage</p>
+      <p>Hertfordshire</p>
+      <p>SG1 1AA</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Kombu. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+
+const menuItems = [
+  { name: "Crispy Chicken Gyoza", price: 4.99, category: "starters", image: "images/chicken-gyoza.png" },
+  { name: "Tofu & Vegetable Gyoza", price: 3.50, category: "starters", image: "images/veg-gyoza.png" },
+  { name: "Prawn & Seaweed Roll", price: 3.80, category: "starters", image: "images/prawn-roll.png" },
+  { name: "Miso Soup", price: 2.50, category: "starters", image: "images/miso-soup.png" },
+  { name: "Chef Special Salad", price: 4.80, category: "starters", image: "images/salad.png" },
+
+  { name: "Chicken Bao Bun", price: 3.50, category: "bao", image: "images/chicken-bao.png" },
+  { name: "Pork Bao Bun", price: 3.80, category: "bao", image: "images/pork-bao.png" },
+  { name: "Prawn Bao Bun", price: 3.80, category: "bao", image: "images/prawn-bao.png" },
+  { name: "Pumpkin Bao Bun", price: 3.50, category: "bao", image: "images/pumpkin-bao.png" },
+
+  { name: "Chicken Teriyaki Donburi", price: 8.50, category: "donburi", image: "images/chicken-teriyaki.png" },
+  { name: "Chicken Katsu Curry Donburi", price: 8.90, category: "donburi", image: "images/katsu-curry.png" },
+  { name: "Spicy Pork Donburi", price: 8.90, category: "donburi", image: "images/spicy-pork.png" },
+  { name: "Crispy Tofu Donburi", price: 7.90, category: "donburi", image: "images/tofu-donburi.png" },
+  { name: "Teriyaki Salmon Donburi", price: 9.50, category: "donburi", image: "images/salmon-teriyaki.png" },
+  { name: "Unagi (Grilled Eel) Donburi", price: 10.50, category: "donburi", image: "images/unagi.png" },
+  { name: "Tempura Prawn Donburi", price: 9.20, category: "donburi", image: "images/tempura-prawn.png" },
+  { name: "Mixed Vegetable Tempura Donburi", price: 7.80, category: "donburi", image: "images/veg-tempura.png" },
+
+  { name: "Edamame", price: 3.00, category: "sides", image: "images/edamame.png" },
+  { name: "Seaweed Salad", price: 3.50, category: "sides", image: "images/seaweed.png" },
+  { name: "Rice", price: 2.00, category: "sides", image: "images/rice.png" },
+
+  { name: "Green Tea", price: 2.00, category: "drinks", image: "images/green-tea.png" },
+  { name: "Soft Drink", price: 1.80, category: "drinks", image: "images/soft-drink.png" }
+
+];
+
+////
+// code refrenced from youtuber Web Dev Simplified 
+// video link:https://youtu.be/YeFzkC2awTM?si=9kX5xyaGtyPUrBO4
+////
+
+function getBasket() {
+  return JSON.parse(localStorage.getItem("basket")) || [];
+}
+
+function saveBasket(basket) {
+  localStorage.setItem("basket", JSON.stringify(basket));
+  updateBasketCount();
+}
+
+function updateBasketCount() {
+  let basket = getBasket();
+  let count = basket.reduce((sum, item) => sum + item.quantity, 0);
+
+  let el = document.getElementById("basket-count");
+  if (el) el.textContent = count;
+}
+
+let currentItems = [...menuItems];
+
+function getItemQuantity(name) {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  let item = basket.find(i => i.name === name);
+  return item ? item.quantity : 0;
+}
+
+function createCard(item) {
+  const card = document.createElement("div");
+  card.className = "food-card";
+
+  const quantity = getItemQuantity(item.name);
+
+  card.innerHTML = `
+    <img src="${item.image}" alt="${item.name}">
+    <h3>${item.name}</h3>
+    <p>£${item.price.toFixed(2)}</p>
+
+    <div class="quantity-controls">
+      <button class="minus-btn">−</button>
+      <span class="qty">${quantity}</span>
+      <button class="plus-btn">+</button>
+    </div>
+  `;
+
+  card.querySelector(".plus-btn").onclick = () => {
+    addItem(item);
+    updateUI();
+  };
+
+  card.querySelector(".minus-btn").onclick = () => {
+    removeItem(item);
+    updateUI();
+  };
+
+  return card;
+}
+
+function renderMenu(items) {
+  const container = document.getElementById("menuContainer");
+  container.innerHTML = "";
+  items.forEach(i => container.appendChild(createCard(i)));
+}
+
+function filterCategory(category, el) {
+  document.querySelectorAll(".category-box").forEach(b => b.classList.remove("active"));
+  el.classList.add("active");
+
+  currentItems = category === "all"
+    ? [...menuItems]
+    : menuItems.filter(i => i.category === category);
+
+  applySearch();
+}
+
+document.getElementById("searchInput").addEventListener("input", applySearch);
+
+function applySearch() {
+  const value = document.getElementById("searchInput").value.toLowerCase();
+
+  const filtered = currentItems.filter(i =>
+    i.name.toLowerCase().includes(value)
+  );
+
+  renderMenu(filtered);
+}
+
+function addItem(item) {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+  let existing = basket.find(i => i.name === item.name);
+
+  if (existing) existing.quantity++;
+  else basket.push({ ...item, quantity: 1 });
+
+  localStorage.setItem("basket", JSON.stringify(basket));
+}
+
+function removeItem(item) {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+
+  let existing = basket.find(i => i.name === item.name);
+  if (!existing) return;
+
+  existing.quantity--;
+
+  if (existing.quantity <= 0) {
+    basket = basket.filter(i => i.name !== item.name);
+  }
+
+  localStorage.setItem("basket", JSON.stringify(basket));
+}
+
+function updateBasketCount() {
+  let basket = JSON.parse(localStorage.getItem("basket")) || [];
+  document.getElementById("basket-count").textContent =
+    basket.reduce((s, i) => s + i.quantity, 0);
+}
+
+function updateUI() {
+  applySearch();
+  updateBasketCount();
+}
+
+renderMenu(menuItems);
+updateBasketCount();
+
+</script>
+
+</body>
+</html>
