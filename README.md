@@ -93,6 +93,16 @@ W3C Test
 
 Google Lighthouse
 ![Google Lighthouse Test](google-lighthouse-test1.png)
+
 Findings
 
 After running this, it was quite noticeable my main error was not adding alt text to images. Additionally, not including a meta description for each page. Running Google Lighthouse also showed that I did not have a landing page.
+
+
+After fix automated test 
+
+W3C Test
+![W£C Test](W3C-testing2.png)
+
+Google Lighthouse
+![Google Lighthouse Test](google-lighthouse-test2.png)
