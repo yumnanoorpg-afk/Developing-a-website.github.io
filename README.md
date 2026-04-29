@@ -67,6 +67,12 @@ Page uses large, readable text and high-contrast colours
 Selected menu items are visually highlighted or clearly confirmed
 Development / Reflection
 
+
+Upgraded wire frame:
+![home wireframe](SameHomePage.png)
+![menu wirframe](upgraded-menu.png)
+![Basket Wireframe](Upgraded-basket.png)
+
 The main change that will be made is to the menu. It will group common food categories together so they are easier to find. This change was made for the ADHD user. This would mean they will be able to make decisions faster and more effectively than getting overwhelmed with a large amount of food listings.
 
 Challenge Faced During Development
@@ -86,7 +92,6 @@ Another issue that stood out was that users could place an order without enterin
 One more issue was there was no way to remove items from the basket, and the users had to relocate the item in the menu to remove a food item.
 
 Automated Testing
-W3C (HTML and CSS Validators)
 
 W3C Test
 ![W£C Test](W3C-testing1.png)
