@@ -77,8 +77,10 @@ one more issue was there was no way to remove items from the basket and the user
 
 automated testing________________
 Testing W3C (HTML and CSS Validators): 
+![W3C Test](W3C-testing1.png)
 
 ​Testing Google lighthouse: 
+![Google Lighthouse Test](google-lighthouse-test1.png)
 
 ​ 
 
