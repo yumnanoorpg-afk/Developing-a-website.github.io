@@ -125,23 +125,24 @@ Manual Testing
 
 Manual testing was carried out to ensure that all user stories were successfully implemented and that the website functions as intended.
 
-User Story Testing
--First-Time Visitor (Persona 1)
---Test: Open homepage and attempt to locate the menu
---Expected Outcome: Menu is visible without scrolling and readable
--- Result: Passed
+User Story Testing  
+
+-First-Time Visitor (Persona 1)  
+--Test: Open homepage and attempt to locate the menu  
+--Expected Outcome: Menu is visible without scrolling and readable  
+-- Result: Passed  
 --Notes: High-contrast colours (orange on black) made menu items clearly visible
 
--Returning Visitor (Persona 2)
---Test: Navigate through the website and locate the “Order Now” option
---Expected Outcome: User can quickly identify the main action without distractions
---Result: Passed
+-Returning Visitor (Persona 2)  
+--Test: Navigate through the website and locate the “Order Now” option  
+--Expected Outcome: User can quickly identify the main action without distractions  
+--Result: Passed  
 --Notes: Simple layout and large buttons improved navigation speed  
 
--Frequent Visitor (Persona 3)
---Test: Add items to basket and complete ordering process
+-Frequent Visitor (Persona 3)  
+--Test: Add items to basket and complete ordering process  
 --Expected Outcome: User can complete ordering in a few steps
---Result: Passed
+--Result: Passed  
 --Notes: Basket system allowed quick selection and review of items  
 
    
