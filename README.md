@@ -118,12 +118,13 @@ JavaScript was used to control the basket state using session-based storage. Thi
 Another issue identified was that users were able to place an order without entering required details such as date, time, and phone number. This made the ordering process incomplete and unrealistic.
 
 Solution:
-JavaScript validation was implemented to ensure that all required fields are completed before an order can be submitted. If any fields are missing, the order is prevented from going through.This improves both functionality and user experience by ensuring that only valid orders can be processed.
+JavaScript validation was implemented to ensure that all required fields are completed before an order can be submitted. If any fields are missing, the order is prevented from going through.This improves both functionality and user experience by ensuring that only valid orders can be processed.   
 
+Deployment Link:  
+https://yumnanoorpg-afk.github.io/Developing-a-website.github.io/   
 
+  
 Manual Testing
-
-Manual testing was carried out to ensure that all user stories were successfully implemented and that the website functions as intended.
 
 User Story Testing  
 
@@ -177,8 +178,8 @@ After running the checks the following improvements were made:
 
 After fix automated test 
 
-W3C Test
+W3C Test  
 ![W£C Test](W3C-testing2.png)
 
-Google Lighthouse
+Google Lighthouse  
 ![Google Lighthouse Test](google-lighthouse-test2.png)
